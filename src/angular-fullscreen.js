@@ -56,9 +56,7 @@
                  //Same code as in $element.on('fullscreenchange...
                   document.addEventListener("mozfullscreenchange",function() {
                      if(!Fullscreen.isEnabled()){
-                        console.log('Full screen change detected.')
                         $scope.$evalAsync(function(){
-                           console.log('removing isInFullScreen class');
                            $scope[$attrs.fullscreen] = false
                            $element.removeClass('isInFullScreen');
                         })
