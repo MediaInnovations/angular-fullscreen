@@ -52,6 +52,18 @@
             link : function ($scope, $element, $attrs) {
                // Watch for changes on scope if model is provided
                if ($attrs.fullscreen) {
+                 //Mozilla behaves differently, when user presses ESC key in full screen mode.
+                 //Same code as in $element.on('fullscreenchange...
+                  document.addEventListener("mozfullscreenchange",function() {
+                     if(!Fullscreen.isEnabled()){
+                        console.log('Full screen change detected.')
+                        $scope.$evalAsync(function(){
+                           console.log('removing isInFullScreen class');
+                           $scope[$attrs.fullscreen] = false
+                           $element.removeClass('isInFullScreen');
+                        })
+                     }
+                  });                  
                   $scope.$watch($attrs.fullscreen, function(value) {
                      var isEnabled = Fullscreen.isEnabled();
                      if (value && !isEnabled) {
