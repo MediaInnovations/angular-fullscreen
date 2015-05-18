@@ -61,6 +61,14 @@
                            $element.removeClass('isInFullScreen');
                         })
                      }
+                  });
+                  document.addEventListener("MSFullscreenChange",function() {
+                     if(!Fullscreen.isEnabled()){
+                        $scope.$evalAsync(function(){
+                           $scope[$attrs.fullscreen] = false
+                           $element.removeClass('isInFullScreen');
+                        })
+                     }
                   });                  
                   $scope.$watch($attrs.fullscreen, function(value) {
                      var isEnabled = Fullscreen.isEnabled();
